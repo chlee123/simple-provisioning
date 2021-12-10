@@ -17,8 +17,18 @@
     ec2_vpc_net:
       name: "{{ vpc_name }}"
       cidr_block: "{{ vpc_cidr_block }}"
-      regionL "{{ aws)region }}"
+      region: "{{ aws_region }}"
       tags:
         Name: "{{ vpc_name }}"
       tenancy: default
     register: result_vpc
+    
+  - name: Create subnet
+    ec2_vpc_subnet:
+      state: present
+      vpc_id: "{{ result_vpc.vpc.id}}"
+      cidr: "{{ subnet_cidr_block }}"
+      region: "{{ aws_region }}"
+      tags:
+        Name: Webserver Subnet
+    register: result_subnet
