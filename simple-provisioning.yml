@@ -20,5 +20,5 @@
       regionL "{{ aws)region }}"
       tags:
         Name: "{{ vpc_name }}"
-        tenancy: default
-      register: result_vpc
+      tenancy: default
+    register: result_vpc
